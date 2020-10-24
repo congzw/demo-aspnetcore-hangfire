@@ -28,7 +28,9 @@ namespace NbSites.Web
             services.AddTransient<IBackgroundCommand, DemoDelayCommand>();
             services.AddTransient<DemoRecurringCommand>();
             services.AddTransient<IBackgroundCommand, DemoRecurringCommand>();
-
+            services.AddTransient<DemoBackupDb>();
+            services.AddTransient<IBackgroundCommand, DemoBackupDb>();
+            
             services.AddConfigHangfire(Configuration);
             // Add the processing server as IHostedService
             services.AddHangfireServer(opt =>

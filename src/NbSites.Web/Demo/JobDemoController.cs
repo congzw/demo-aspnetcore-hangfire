@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace NbSites.Web.Demo
 {
@@ -32,7 +35,17 @@ namespace NbSites.Web.Demo
             demoCommand.Enqueue();
             return Json(demoCommand);
         }
-        
+
+        public IActionResult Call4([FromServices] DemoBackupDb demoCommand, [FromServices] IWebHostEnvironment env)
+        {
+            demoCommand.Args = new BackupDbBatFile
+            {
+                FilePath = Path.Combine(env.ContentRootPath, "backup_database.bat")
+            };
+            demoCommand.Enqueue();
+            return Json(demoCommand);
+        }
+
         public IActionResult GetAllCommands([FromServices] IEnumerable<IBackgroundCommand> commands)
         {
             return Json(commands.Select(x => x.GetType().Name));
