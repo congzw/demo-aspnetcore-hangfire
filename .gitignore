@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /NbSites.Web/demo_command_logs.txt
+/src/NbSites.Web/demo_command_logs.txt
